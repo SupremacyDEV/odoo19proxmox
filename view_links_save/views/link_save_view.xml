@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!-- /////////////////////////////////////////////////////////////pbi/////////////////////////////////////////////////////////////// -->
+
+    <record id="link_save_view_pbi_kanban_view" model="ir.ui.view">
+        <field name="name">link.save.view.pbi.kanban.view</field>
+        <field name="model">link.save.view.pbi</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id" />
+                <field name="name" />
+                <field name="dashboard_image" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                            <div class="o_kanban_image d-md-block"
+                                t-attf-style="background-image: url('{{ kanban_image('link.save.view.pbi', 'dashboard_image', record.id.raw_value) }}');">
+                            </div>
+                            <div class="oe_kanban_details d-flex flex-column">
+                            <strong><field name="name" /></strong>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="link_save_view_view_form_pbi" model="ir.ui.view">
+            <field name="name">link_save_view.view.form.pbi</field>
+            <field name="model">link.save.view.pbi</field>
+            <field eval="100" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Enlaces PBI">
+                    <sheet>
+                        <div class="oe_tittle" name="title_quality_control">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>  
+                        <group>
+                            <group>
+                            <field name="title" groups="view_links_save.group_views_links_admin"/>
+                            <field name="link" groups="view_links_save.group_views_links_admin"/>
+                            <field name="company_id" groups="view_links_save.group_views_links_admin"/>
+                            </group>
+                            <group>
+                                <field name="user_ids" widget="many2many_tags" groups="view_links_save.group_views_links_admin"/>
+                                <field name="dashboard_image" class="oe_avatar" widget="image" groups="view_links_save.group_views_links_admin"/>                                
+                            </group>
+                            <label for="note" />
+                            <field name="note" placeholder="Comentarios o Nota" groups="view_links_save.group_views_links_admin"/>         
+                            <field name="iframe_html" string="Url"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+    <record id="link_save_view_action_pbi" model="ir.actions.act_window">
+        <field name="name">Enlaces Power BI</field>
+        <field name="res_model">link.save.view.pbi</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="view_id" ref="link_save_view_pbi_kanban_view"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                 Ingrese un enlace a guardar
+            </p>                
+        </field>
+    </record>
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+        <menuitem name="Dashboards PBI"
+            id="menu_root_view_links_save"
+            web_icon="view_links_save,static/description/icon.png"
+            sequence="9"/>
+
+        <menuitem
+            id="submenu_view_links_save_pbi"
+            name="Enlaces PBI"
+            parent="menu_root_view_links_save"
+            groups = "view_links_save.group_views_links_pbi,view_links_save.group_views_links_admin"
+            action="link_save_view_action_pbi"            
+            sequence="1"/>
+    </data>
+</odoo>

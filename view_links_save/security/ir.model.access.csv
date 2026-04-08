@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_view_links_pbi,access.view.links.pbi,model_link_save_view_pbi,view_links_save.group_views_links_pbi,1,1,1,1
+access_view_links_admin,access.view.links.admin,model_link_save_view_pbi,view_links_save.group_views_links_admin,1,1,1,1

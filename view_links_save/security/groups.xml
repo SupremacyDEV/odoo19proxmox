@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>  
+    <data>      
+
+        <record id="category_views_links" model="ir.module.category">
+            <field name="name">Enlaces</field>
+            <field name="description">Categoria enlaces</field>
+            <field name="sequence">12</field>
+        </record>
+        
+        <record id="group_views_links_pbi" model="res.groups">
+            <field name="name">Ver modulo enlaces PBI</field>
+            <field name="category_id" ref="view_links_save.category_views_links"/>
+            <field name="implied_ids" eval="[(4, ref('view_links_save.group_views_links_pbi'))]"/>
+        </record>
+
+        <record id="group_views_links_admin" model="res.groups">
+            <field name="name">Ver modulo enlaces Admin</field>
+            <field name="category_id" ref="view_links_save.category_views_links"/>
+            <field name="implied_ids" eval="[(4, ref('view_links_save.group_views_links_pbi'))]"/>
+        </record>
+
+        <record model="ir.rule" id="view_link_save_multi_company_rule_pbi">
+            <field name="name">enlaces multi company rules PBI</field>
+            <field name="model_id" ref="model_link_save_view_pbi"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>   
+
+</odoo>
